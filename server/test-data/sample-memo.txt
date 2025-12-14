@@ -1,0 +1,76 @@
+MARKING MEMORANDUM
+==================
+Mathematics Final Examination - Total: 100 marks
+
+SECTION A: SHORT ANSWER QUESTIONS (40 marks)
+
+Question 1: (10 marks)
+Find the derivative of f(x) = 3x^3 + 2x^2 - 5x + 1 and evaluate it at x = 2.
+
+Solution:
+f'(x) = 9x^2 + 4x - 5  [5 marks]
+f'(2) = 9(4) + 4(2) - 5 = 36 + 8 - 5 = 39  [5 marks]
+
+Question 2: (10 marks)
+Evaluate the definite integral: ∫[0,2] (x^2 + 3x) dx
+
+Solution:
+Antiderivative: (x^3/3) + (3x^2/2)  [4 marks]
+Evaluate at bounds: [(8/3 + 6) - (0)] = 8/3 + 6 = 26/3  [6 marks]
+
+Question 3: (10 marks)
+Solve the system of linear equations:
+2x + 3y = 8
+x - y = 1
+
+Solution:
+From second equation: x = 1 + y  [2 marks]
+Substitute: 2(1 + y) + 3y = 8  [3 marks]
+2 + 2y + 3y = 8
+5y = 6
+y = 6/5  [3 marks]
+x = 1 + 6/5 = 11/5  [2 marks]
+
+Question 4: (10 marks)
+Determine whether the series Σ(1/n^2) converges or diverges.
+
+Solution:
+This is a p-series with p = 2  [4 marks]
+Since p > 1, the series converges  [6 marks]
+Actual sum ≈ π^2/6 ≈ 1.645 (bonus knowledge)
+
+SECTION B: LONG ANSWER QUESTIONS (60 marks)
+
+Question 5: (20 marks)
+Profit Optimization Problem
+
+Solution:
+(a) P(x) = R(x) - C(x) = 50x - (100 + 5x + 0.01x^2) = 45x - 0.01x^2 - 100  [5 marks]
+
+(b) Find maximum:
+P'(x) = 45 - 0.02x = 0
+x = 2250 units  [8 marks]
+
+(c) P(2250) = 45(2250) - 0.01(2250)^2 - 100 = 101,250 - 50,625 - 100 = 50,525  [7 marks]
+
+Question 6: (20 marks)
+Using FTC:
+∫[1,4] (2x^3 - 3x + 5) dx = [x^4/2 - 3x^2/2 + 5x] from 1 to 4
+= (128 - 24 + 20) - (1/2 - 3/2 + 5)
+= 124 - 3 = 121  [10 marks]
+
+Verification using antiderivatives: Confirmed correct  [10 marks]
+
+Question 7: (20 marks)
+Matrix Analysis
+
+(a) Characteristic equation: det(A - λI) = 0
+(1-λ)(4-λ) - 6 = 0
+λ^2 - 5λ - 2 = 0
+λ = (5 ± √33)/2  [7 marks]
+
+(b) Eigenvectors found by solving (A - λI)v = 0 for each eigenvalue  [7 marks]
+
+(c) Since we have 2 distinct eigenvalues for a 2×2 matrix, A is diagonalizable  [6 marks]
+
+TOTAL POSSIBLE: 100 marks

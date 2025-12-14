@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.2.6">
+  <diagram name="Page-1" id="GGAuxUxbKo-NIr2KWTHU">
+    <mxGraphModel dx="906" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-18" edge="1" parent="1" source="tjC4mCLAIh8PCeXVHMIt-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="instructor" vertex="1">
+          <mxGeometry height="80" width="40" x="130" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-6" parent="1" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" value="Instructor" vertex="1">
+          <mxGeometry height="200" width="1390" x="70" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-2" parent="tjC4mCLAIh8PCeXVHMIt-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Upload Test(s)&lt;div&gt;- Scanned PDFs&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- one-by-one or bulk upload&lt;/div&gt;" vertex="1">
+          <mxGeometry height="85" width="150" x="930" y="47.5" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-17" edge="1" parent="tjC4mCLAIh8PCeXVHMIt-6" source="tjC4mCLAIh8PCeXVHMIt-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-10" parent="tjC4mCLAIh8PCeXVHMIt-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Select / Createcourse:&lt;div&gt;- Study guide&lt;/div&gt;&lt;div&gt;- Textbook&lt;/div&gt;&lt;div&gt;- Extra materials&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="120" x="160" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-14" parent="tjC4mCLAIh8PCeXVHMIt-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Create a AI grader, Upload (pdfs):&lt;div&gt;- Test with questions&lt;/div&gt;&lt;div&gt;- Memo with question answer&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="140" x="330" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-34" edge="1" parent="tjC4mCLAIh8PCeXVHMIt-6" source="tjC4mCLAIh8PCeXVHMIt-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-32" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-27" parent="tjC4mCLAIh8PCeXVHMIt-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Show the questions and answers with short description of what AI understands (Can be edited)&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Where marks are awarded (Can be edited)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="520" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-35" edge="1" parent="tjC4mCLAIh8PCeXVHMIt-6" source="tjC4mCLAIh8PCeXVHMIt-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-32" parent="tjC4mCLAIh8PCeXVHMIt-6" style="rounded=1;whiteSpace=wrap;html=1;" value="AI Grader created:&lt;div&gt;- Course&lt;/div&gt;&lt;div&gt;- Memo and answers&lt;/div&gt;&lt;div&gt;- Where marks allocated for each question&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="140" x="750" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-39" parent="tjC4mCLAIh8PCeXVHMIt-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Show results and feedback:&lt;div&gt;- Table&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Summary stats / analytics&lt;/div&gt;&lt;div&gt;- Export as excel&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="105" width="160" x="1150" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-7" parent="1" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" value="Cleverly Backend" vertex="1">
+          <mxGeometry height="200" width="1390" x="70" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-29" edge="1" parent="tjC4mCLAIh8PCeXVHMIt-7" source="tjC4mCLAIh8PCeXVHMIt-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-28" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-4" parent="tjC4mCLAIh8PCeXVHMIt-7" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Gemini RAG:&lt;/div&gt;&lt;div&gt;- Embeddings&lt;/div&gt;&lt;div&gt;-&amp;nbsp; OCR&lt;/div&gt;&lt;div&gt;- Image to text&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="340" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-28" parent="tjC4mCLAIh8PCeXVHMIt-7" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;Short description&lt;/div&gt;&lt;div&gt;of understanding of each answser for the&lt;/div&gt;&lt;div&gt;question&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="130" x="540" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-40" edge="1" parent="tjC4mCLAIh8PCeXVHMIt-7" source="tjC4mCLAIh8PCeXVHMIt-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-38" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-36" parent="tjC4mCLAIh8PCeXVHMIt-7" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Gemini RAG for each test:&lt;/div&gt;&lt;div&gt;- Embeddings&lt;/div&gt;&lt;div&gt;-&amp;nbsp; OCR&lt;/div&gt;&lt;div&gt;- Image to text&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="95" width="145" x="932.5" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-38" parent="tjC4mCLAIh8PCeXVHMIt-7" style="rounded=1;whiteSpace=wrap;html=1;" value="AI Grader Marks each question&amp;nbsp;&lt;div&gt;vs the memo&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="130" x="1160" y="52.5" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-16" edge="1" parent="1" source="tjC4mCLAIh8PCeXVHMIt-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="tjC4mCLAIh8PCeXVHMIt-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-30" edge="1" parent="1" source="tjC4mCLAIh8PCeXVHMIt-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="tjC4mCLAIh8PCeXVHMIt-27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-37" edge="1" parent="1" source="tjC4mCLAIh8PCeXVHMIt-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="tjC4mCLAIh8PCeXVHMIt-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tjC4mCLAIh8PCeXVHMIt-41" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1299" y="383" />
+            </Array>
+            <mxPoint x="1293.9565217391305" y="382.5" as="sourcePoint" />
+            <mxPoint x="1299" y="275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

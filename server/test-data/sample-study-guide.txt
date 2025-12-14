@@ -1,0 +1,42 @@
+ADVANCED MATHEMATICS - STUDY GUIDE
+===================================
+
+COURSE OVERVIEW
+This course covers advanced mathematical concepts including calculus, linear algebra, and mathematical analysis.
+
+TOPICS COVERED
+1. Differential Calculus
+   - Limits and continuity
+   - Derivatives and their applications
+   - The chain rule
+   - Optimization problems
+
+2. Integral Calculus
+   - Antiderivatives
+   - Definite and indefinite integrals
+   - Integration by parts
+   - Applications of integration
+
+3. Linear Algebra
+   - Matrix operations
+   - Eigenvalues and eigenvectors
+   - Vector spaces
+   - Linear transformations
+
+4. Mathematical Analysis
+   - Real numbers and properties
+   - Sequences and series
+   - Convergence and divergence
+   - Functions of several variables
+
+KEY CONCEPTS
+- Understand the fundamental theorem of calculus
+- Master derivative and integral calculations
+- Apply calculus to real-world optimization problems
+- Work with matrices and linear transformations
+- Analyze convergence of series
+
+EXAM PREPARATION
+Review all worked examples and practice problems
+Understand the derivations, not just the final answers
+Practice applying concepts to new problems

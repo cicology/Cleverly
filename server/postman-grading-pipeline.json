@@ -1,0 +1,555 @@
+{
+  "info": {
+    "name": "Cleverly Grading Pipeline - End-to-End Test",
+    "description": "Complete test collection for the grading pipeline workflow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000",
+      "type": "default"
+    },
+    {
+      "key": "courseId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "graderId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "submissionId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "gradeId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "demoToken",
+      "value": "",
+      "type": "default"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response is healthy\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.ok).to.equal(true);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a1"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Verify the API server is running and healthy"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Create Course",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Course created with ID\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.course.id).to.be.a('string');",
+              "    pm.collectionVariables.set('courseId', jsonData.course.id);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a2"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "Advanced Mathematics - Test Course",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "Test course for grading pipeline validation",
+              "type": "text"
+            },
+            {
+              "key": "topics",
+              "value": "[\"Calculus\", \"Algebra\", \"Geometry\"]",
+              "type": "text"
+            },
+            {
+              "key": "study_guide",
+              "src": [],
+              "type": "file",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/courses",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "courses"]
+        },
+        "description": "Create a new course with optional study materials"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Create Grader",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Grader created with ID\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.grader_id).to.be.a('string');",
+              "    pm.collectionVariables.set('graderId', jsonData.grader_id);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a3"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "course_id",
+              "value": "{{courseId}}",
+              "type": "text"
+            },
+            {
+              "key": "title",
+              "value": "Mathematics Final Exam - Test Grader",
+              "type": "text"
+            },
+            {
+              "key": "total_marks",
+              "value": "100",
+              "type": "text"
+            },
+            {
+              "key": "test_file",
+              "src": [],
+              "type": "file",
+              "disabled": true
+            },
+            {
+              "key": "memo_file",
+              "src": [],
+              "type": "file",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/graders",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "graders"]
+        },
+        "description": "Create a grader with test paper and marking memo"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Get Grader Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Grader details retrieved\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.grader).to.be.an('object');",
+              "    pm.expect(jsonData.rubric).to.be.an('array');",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a4"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/graders/{{graderId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "graders", "{{graderId}}"]
+        },
+        "description": "Retrieve grader details and associated rubric"
+      },
+      "response": []
+    },
+    {
+      "name": "5. Upload Submission",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Submission uploaded with ID\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.submissions[0].id).to.be.a('string');",
+              "    pm.collectionVariables.set('submissionId', jsonData.submissions[0].id);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a5"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "student_identifier",
+              "value": "TEST_STUDENT_001",
+              "type": "text"
+            },
+            {
+              "key": "files",
+              "src": [],
+              "type": "file",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/submissions/graders/{{graderId}}/submissions",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "submissions", "graders", "{{graderId}}", "submissions"]
+        },
+        "description": "Upload student submission for grading"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get Submissions for Grader",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Submissions retrieved\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.submissions).to.be.an('array');",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a6"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/submissions/graders/{{graderId}}/submissions",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "submissions", "graders", "{{graderId}}", "submissions"]
+        },
+        "description": "List all submissions for a grader"
+      },
+      "response": []
+    },
+    {
+      "name": "7. Trigger Grade-All",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Grading queued\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.queued).to.be.a('number');",
+              "    pm.expect(jsonData.queued).to.be.greaterThan(0);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a7"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/submissions/graders/{{graderId}}/grade-all",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "submissions", "graders", "{{graderId}}", "grade-all"]
+        },
+        "description": "Start grading process for all submissions under this grader"
+      },
+      "response": []
+    },
+    {
+      "name": "8. Get Submission Details (Poll for Grading)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Submission details retrieved\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.submission).to.be.an('object');",
+              "    pm.expect(jsonData.submission.status).to.be.a('string');",
+              "    console.log('Submission Status:', jsonData.submission.status);",
+              "});",
+              "",
+              "pm.test(\"Grades available if graded\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    if (jsonData.submission.status === 'graded') {",
+              "        pm.expect(jsonData.grades).to.be.an('array');",
+              "        if (jsonData.grades.length > 0) {",
+              "            pm.collectionVariables.set('gradeId', jsonData.grades[0].id);",
+              "        }",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a8"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/submissions/submissions/{{submissionId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "submissions", "submissions", "{{submissionId}}"]
+        },
+        "description": "Poll submission status and grades. Repeat this request until status changes from 'pending' to 'graded'"
+      },
+      "response": []
+    },
+    {
+      "name": "9. Get Analytics",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Analytics data available\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.stats).to.be.an('object');",
+              "    if (jsonData.stats) {",
+              "        console.log('Graded Count:', jsonData.stats.graded_count);",
+              "        console.log('Pending Count:', jsonData.stats.pending_count);",
+              "        console.log('Average Percentage:', jsonData.stats.average_percentage);",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript",
+            "id": "a9"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/analytics/graders/{{graderId}}/analytics",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "analytics", "graders", "{{graderId}}", "analytics"]
+        },
+        "description": "Get grading statistics and analytics for this grader"
+      },
+      "response": []
+    },
+    {
+      "name": "10. Override Grade",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (!pm.collectionVariables.get('gradeId')) {",
+              "    pm.test(\"Grade ID available\", function() {",
+              "        pm.expect(true).to.be.false;",
+              "    });",
+              "} else {",
+              "    pm.test(\"Status code is 200\", function () {",
+              "        pm.response.to.have.status(200);",
+              "    });",
+              "    ",
+              "    pm.test(\"Grade override successful\", function () {",
+              "        var jsonData = pm.response.json();",
+              "        pm.expect(jsonData.updated).to.equal(true);",
+              "    });",
+              "}"
+            ],
+            "type": "text/javascript",
+            "id": "a10"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{demoToken}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"marks_awarded\": 85,\n  \"override_reason\": \"Test override for verification purposes\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/submission-grades/{{gradeId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "submission-grades", "{{gradeId}}"]
+        },
+        "description": "Override a grade with manual marks (optional test)"
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{demoToken}}",
+        "type": "string"
+      }
+    ]
+  }
+}

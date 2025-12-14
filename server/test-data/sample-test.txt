@@ -1,0 +1,43 @@
+MATHEMATICS FINAL EXAMINATION
+==============================
+Time: 3 hours
+Total Marks: 100
+
+SECTION A: SHORT ANSWER QUESTIONS (40 marks)
+
+Question 1: (10 marks)
+Find the derivative of f(x) = 3x^3 + 2x^2 - 5x + 1 and evaluate it at x = 2.
+
+Question 2: (10 marks)
+Evaluate the definite integral: ∫[0,2] (x^2 + 3x) dx
+
+Question 3: (10 marks)
+Solve the system of linear equations:
+2x + 3y = 8
+x - y = 1
+
+Question 4: (10 marks)
+Determine whether the series Σ(1/n^2) converges or diverges. Justify your answer.
+
+SECTION B: LONG ANSWER QUESTIONS (60 marks)
+
+Question 5: (20 marks)
+A company produces widgets with cost function C(x) = 100 + 5x + 0.01x^2, where x is the number of units.
+The revenue function is R(x) = 50x.
+(a) Find the profit function P(x)
+(b) Find the number of units that maximize profit
+(c) Calculate the maximum profit
+
+Question 6: (20 marks)
+Use the fundamental theorem of calculus to evaluate:
+∫[1,4] (2x^3 - 3x + 5) dx
+
+Then verify your answer using antiderivatives.
+
+Question 7: (20 marks)
+Given the matrix A = [[1, 2], [3, 4]]
+(a) Find the eigenvalues of A
+(b) Find the corresponding eigenvectors
+(c) Determine if A is diagonalizable
+
+END OF EXAMINATION

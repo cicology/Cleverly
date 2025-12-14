@@ -1,0 +1,312 @@
+================================================================================
+GRADING PIPELINE TEST FLOW DIAGRAM
+================================================================================
+
+TEST EXECUTION SEQUENCE
+=======================
+
+Start: npm run test:pipeline
+    |
+    v
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 1: Health Check                                                │
+│ GET /api/health                                                     │
+│ Verify server is running and responding                             │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → exit)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 2: Create Course                                               │
+│ POST /api/courses                                                   │
+│ Fields: title, description, topics                                  │
+│ Files: study_guide (optional)                                       │
+│ Returns: course_id (saved for next steps)                           │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → exit)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 3: Create Grader                                               │
+│ POST /api/graders                                                   │
+│ Fields: course_id, title, total_marks                               │
+│ Files: test_file, memo_file (optional)                              │
+│ Returns: grader_id (saved for next steps)                           │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → exit)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 4: Upload Submission                                           │
+│ POST /api/submissions/graders/{graderId}/submissions                │
+│ Fields: student_identifier                                          │
+│ Files: submission file                                              │
+│ Returns: submission_id (saved for next steps)                       │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → exit)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 5: Trigger Grading                                             │
+│ POST /api/submissions/graders/{graderId}/grade-all                  │
+│ Triggers async grading job                                          │
+│ Returns: number of submissions queued                               │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → exit)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 6: Poll for Results                                            │
+│ GET /api/submissions/submissions/{submissionId}                     │
+│                                                                     │
+│ Poll Loop (up to 30 seconds):                                       │
+│   ├─ Wait 2 seconds                                                 │
+│   ├─ Check submission status                                        │
+│   ├─ If status = "graded" → Success! Extract gradeId               │
+│   ├─ If status = "pending" → Continue polling                      │
+│   └─ If timeout → Fail                                              │
+│                                                                     │
+│ Returns: submission with grades (saves gradeId for step 8)         │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → continue)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 7: Get Analytics                                               │
+│ GET /api/analytics/graders/{graderId}/analytics                     │
+│ Retrieve grading statistics                                         │
+│ Returns: graded_count, pending_count, average_percentage            │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v (success) or (fail → continue)
+┌─────────────────────────────────────────────────────────────────────┐
+│ Step 8: Override Grade (Optional)                                   │
+│ PATCH /api/submission-grades/{gradeId}                              │
+│ Body: { marks_awarded: 85, override_reason: "..." }                 │
+│                                                                     │
+│ Only runs if gradeId was obtained from Step 6                       │
+│ Returns: { updated: true }                                          │
+└──────────────────┬──────────────────────────────────────────────────┘
+                   │
+                   v
+            SUMMARY REPORT
+            ├─ Total Tests: 8
+            ├─ Passed: X
+            ├─ Failed: Y
+            └─ Exit Code: 0 (success) or 1 (failure)
+                   |
+                   v
+                  END
+
+
+DATA FLOW THROUGH STEPS
+=======================
+
+Step 1: Health Check
+    Input:  API_BASE_URL
+    Output: Server health status (ok: true/false)
+
+Step 2: Create Course
+    Input:  API_BASE_URL, test data (title, description, topics)
+    Output: course_id → SAVED
+
+Step 3: Create Grader
+    Input:  API_BASE_URL, course_id (from Step 2), test data
+    Output: grader_id → SAVED
+
+Step 4: Upload Submission
+    Input:  API_BASE_URL, grader_id (from Step 3), submission file
+    Output: submission_id → SAVED
+
+Step 5: Trigger Grading
+    Input:  API_BASE_URL, grader_id (from Step 3)
+    Output: queued count
+
+Step 6: Poll for Results
+    Input:  API_BASE_URL, submission_id (from Step 4)
+    Output: submission status, grades[], gradeId (if graded) → SAVED
+
+    [POLLING LOOP]
+    Time     Status    Action
+    ────────────────────────────────────────
+    0s       pending   → wait 2s
+    2s       pending   → wait 2s
+    4s       pending   → wait 2s
+    6s       graded    → SUCCESS! Extract gradeId
+
+Step 7: Get Analytics
+    Input:  API_BASE_URL, grader_id (from Step 3)
+    Output: stats {graded_count, pending_count, average_percentage}
+
+Step 8: Override Grade
+    Input:  API_BASE_URL, gradeId (from Step 6), marks data
+    Output: { updated: true }
+
+
+FILE DEPENDENCIES
+=================
+
+test-grading-pipeline.ts
+    ├─ Reads from:
+    │  ├─ test-data/sample-study-guide.txt
+    │  ├─ test-data/sample-test.txt
+    │  ├─ test-data/sample-memo.txt
+    │  └─ test-data/sample-submission.txt
+    │
+    ├─ Uses environment variables:
+    │  ├─ API_URL (default: http://localhost:4000)
+    │  └─ SUPABASE_DEMO_TOKEN (optional)
+    │
+    └─ Produces:
+       ├─ Console output (pass/fail per step)
+       └─ Exit code (0 or 1)
+
+
+TEST SUCCESS CRITERIA
+====================
+
+For test to PASS:
+    ✓ Health check returns ok: true
+    ✓ Course created with valid UUID
+    ✓ Grader created with valid UUID
+    ✓ Submission uploaded with valid UUID
+    ✓ Grading queued (queued > 0)
+    ✓ Submission status changes to "graded" within 30 seconds
+    ✓ Grade records returned with valid data
+    ✓ Analytics endpoint responds with stats
+
+For test to FAIL:
+    ✗ Server not responding
+    ✗ Any API call returns HTTP error
+    ✗ JSON parsing fails
+    ✗ Required field missing in response
+    ✗ Grading doesn't complete within timeout
+    ✗ Grade override fails (if gradeId available)
+
+
+DATABASE IMPACT
+===============
+
+Test creates:
+    1 Course record (courses table)
+    1 Grader record (graders table)
+    1 Rubric entry (rubrics table)
+    1 Submission record (submissions table)
+    1 Grade record (submission_grades table)
+
+After running tests, database will contain test data. Can be cleaned up with:
+    DELETE FROM courses WHERE title LIKE '%Test%'
+    DELETE FROM graders WHERE title LIKE '%Test%'
+    DELETE FROM submissions WHERE student_identifier = 'TEST_STUDENT_001'
+
+
+CONFIGURATION OPTIONS
+====================
+
+Basic Run:
+    npm run test:pipeline
+
+With Custom API URL:
+    API_URL=http://api.example.com npm run test:pipeline
+
+With Authentication:
+    SUPABASE_DEMO_TOKEN=token npm run test:pipeline
+
+Both:
+    API_URL=http://api.example.com \
+    SUPABASE_DEMO_TOKEN=token \
+    npm run test:pipeline
+
+Modified Timeouts (in test script):
+    const MAX_POLL_TIME = 60000;  // Wait up to 60 seconds
+    const POLL_INTERVAL = 5000;   // Check every 5 seconds
+
+
+PERFORMANCE TIMELINE
+===================
+
+Typical execution:
+    0s    - Start test script
+    0-2s  - Health check
+    2-4s  - Create course
+    4-6s  - Create grader
+    6-8s  - Upload submission
+    8-10s - Trigger grading
+    10-40s - Poll for grading completion (varies, ~20-30s typical)
+    40-42s - Get analytics
+    42-44s - Override grade
+    44-45s - Summary report
+
+    TOTAL: 30-60 seconds (depending on system and grading speed)
+
+
+ERROR RECOVERY
+==============
+
+Step 1 Fails → EXIT (server not running)
+Step 2 Fails → EXIT (cannot proceed without course)
+Step 3 Fails → EXIT (cannot proceed without grader)
+Step 4 Fails → EXIT (cannot proceed without submission)
+Step 5 Fails → EXIT (cannot trigger grading)
+Step 6 Fails → CONTINUE (but no grade for step 8)
+Step 7 Fails → CONTINUE (optional step)
+Step 8 Fails → CONTINUE (optional step, depends on step 6)
+
+
+LOGGING EXAMPLE
+==============
+
+[✓] Step 1: Health Check
+    Server health check passed
+    Data: {"ok":true}
+
+[✓] Step 2: Create Course
+    Course created successfully (ID: 550e8400-e29b-41d4-a716-446655440000)
+    Data: {"id":"550e8400-e29b-41d4-a716-446655440000","title":"Advanced...
+
+[✓] Step 3: Create Grader
+    Grader created successfully (ID: 550e8400-e29b-41d4-a716-446655440001)
+    Data: {"grader_id":"550e8400-e29b-41d4-a716-446655440001","status":"p...
+
+[✓] Step 4: Upload Submission
+    Submission uploaded successfully (ID: 550e8400-e29b-41d4-a716-446655440002)
+    Data: {"id":"550e8400-e29b-41d4-a716-446655440002","status":"pending...
+
+[✓] Step 5: Trigger Grading
+    Grading started for 1 submission(s)
+    Data: {"queued":1}
+
+[✓] Step 6: Poll for Results
+    Submission graded successfully. Total Score: 85/100
+    Data: {"submission":{"id":"...","status":"graded","total_score":85,...
+
+[✓] Step 7: Get Analytics
+    Analytics retrieved successfully
+    Data: {"graded_count":1,"pending_count":0,"average_percentage":85}
+
+[✓] Step 8: Override Grade (Optional)
+    Grade override completed successfully
+    Data: {"updated":true}
+
+========================================
+Test Summary
+========================================
+Total Tests: 8
+Passed: 8
+Failed: 0
+
+✓ All tests passed!
+
+
+ALTERNATIVE: POSTMAN FLOW
+========================
+
+Same workflow but executed through Postman GUI:
+
+1. Import postman-grading-pipeline.json
+2. Set environment variables:
+   - baseUrl: http://localhost:4000
+   - demoToken: (empty or your token)
+3. Run each request in order:
+   - Click request
+   - View response
+   - Check test assertions
+   - Proceed to next request
+4. Variables auto-populate between requests
+5. View test results in "Test Results" tab
+
+================================================================================

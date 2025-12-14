@@ -1,0 +1,86 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+package-lock.json
+client/package-lock.json
+server/package-lock.json
+
+# Build outputs
+dist/
+client/dist/
+server/dist/
+build/
+*.tsbuildinfo
+
+# Environment variables (CRITICAL - Contains API keys & secrets!)
+.env
+.env.local
+.env.production
+.env.development
+server/.env
+server/.env.local
+client/.env
+client/.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+uploads/
+*.tmp
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Redis
+dump.rdb
+
+# Documentation (keep local only for now)
+# You can comment these out later if you want to share docs
+*.md.backup
+NOTES.md
+TODO_PRIVATE.md
+
+# Sensitive test data
+server/test-data/*.pdf
+server/test-data/*.docx
+
+# Production configs (if different from .env)
+config/production.json
+config/secrets.json

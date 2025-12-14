@@ -1,0 +1,72 @@
+STUDENT SUBMISSION - TEST_STUDENT_001
+=====================================
+Mathematics Final Examination Answer Sheet
+
+SECTION A: SHORT ANSWER QUESTIONS
+
+Question 1:
+The derivative of f(x) = 3x^3 + 2x^2 - 5x + 1
+f'(x) = 9x^2 + 4x - 5
+At x = 2: f'(2) = 9(4) + 4(2) - 5 = 36 + 8 - 5 = 39
+
+Question 2:
+∫[0,2] (x^2 + 3x) dx
+The antiderivative is (x^3/3) + (3x^2/2)
+Evaluating from 0 to 2: (8/3 + 6) - 0 = 8/3 + 6 = 26/3 ≈ 8.67
+
+Question 3:
+2x + 3y = 8
+x - y = 1
+
+From the second equation: x = y + 1
+Substituting into the first: 2(y + 1) + 3y = 8
+2y + 2 + 3y = 8
+5y = 6
+y = 6/5 = 1.2
+x = 1 + 1.2 = 2.2
+
+Question 4:
+The series Σ(1/n^2) is a p-series with p = 2. Since p > 1, the series converges.
+
+SECTION B: LONG ANSWER QUESTIONS
+
+Question 5: Profit Optimization
+Cost: C(x) = 100 + 5x + 0.01x^2
+Revenue: R(x) = 50x
+
+(a) Profit = Revenue - Cost
+P(x) = 50x - 100 - 5x - 0.01x^2 = 45x - 100 - 0.01x^2
+
+(b) To maximize: P'(x) = 45 - 0.02x = 0
+x = 45/0.02 = 2250 units
+
+(c) Maximum profit = 45(2250) - 100 - 0.01(2250)^2
+= 101,250 - 100 - 50,625 = 50,525
+
+Question 6: Integration Problem
+∫[1,4] (2x^3 - 3x + 5) dx
+
+Antiderivative: F(x) = (2x^4/4) - (3x^2/2) + 5x = (x^4/2) - (3x^2/2) + 5x
+
+F(4) = (256/2) - (3·16/2) + 20 = 128 - 24 + 20 = 124
+F(1) = (1/2) - (3/2) + 5 = 0.5 - 1.5 + 5 = 4
+
+∫[1,4] = 124 - 4 = 120
+
+Question 7: Matrix Analysis
+A = [[1, 2], [3, 4]]
+
+(a) Eigenvalues:
+det(A - λI) = det([[1-λ, 2], [3, 4-λ]]) = (1-λ)(4-λ) - 6
+= 4 - λ - 4λ + λ^2 - 6 = λ^2 - 5λ - 2
+
+λ = (5 ± √(25 + 8))/2 = (5 ± √33)/2
+
+(b) For λ1 = (5 + √33)/2 ≈ 5.37:
+(A - λ1I)v = 0 gives eigenvector v1
+For λ2 = (5 - √33)/2 ≈ -0.37:
+(A - λ2I)v = 0 gives eigenvector v2
+
+(c) Since we have 2 distinct eigenvalues for a 2×2 matrix, A is diagonalizable.
+
+END OF SUBMISSION
