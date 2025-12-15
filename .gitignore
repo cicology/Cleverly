@@ -71,9 +71,7 @@ uploads/
 # Redis
 dump.rdb
 
-# Documentation (keep local only)
-*.md
-!README.md
+# Documentation
 *.md.backup
 NOTES.md
 TODO_PRIVATE.md
