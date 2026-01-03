@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/courses/create/page": "/courses/create",
+  "/analytics/page": "/analytics",
+  "/graders/create/page": "/graders/create",
+  "/page": "/",
+  "/graders/page": "/graders",
+  "/courses/page": "/courses",
+  "/graders/[id]/page": "/graders/[id]",
+  "/submissions/page": "/submissions",
+  "/settings/page": "/settings",
+  "/grading/page": "/grading"
+}

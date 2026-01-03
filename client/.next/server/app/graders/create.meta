@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/graders/layout,_N_T_/graders/create/layout,_N_T_/graders/create/page,_N_T_/graders/create"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/graders/create/__PAGE__",
+    "/graders/create",
+    "/graders",
+    "/_index",
+    "/_head"
+  ]
+}

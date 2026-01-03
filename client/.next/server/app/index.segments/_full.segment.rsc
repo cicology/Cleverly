@@ -1,0 +1,33 @@
+1:"$Sreact.fragment"
+2:I[1946,["179","static/chunks/179-7880f3be5613c168.js","757","static/chunks/757-867bd0db11d44168.js","727","static/chunks/727-189a4a547f964be9.js","762","static/chunks/762-5ef1cd0d777a0220.js","907","static/chunks/907-48e293d9973bc953.js","177","static/chunks/app/layout-c384bc2ca92da904.js"],"ErrorBoundary"]
+3:I[1975,["179","static/chunks/179-7880f3be5613c168.js","757","static/chunks/757-867bd0db11d44168.js","727","static/chunks/727-189a4a547f964be9.js","762","static/chunks/762-5ef1cd0d777a0220.js","907","static/chunks/907-48e293d9973bc953.js","177","static/chunks/app/layout-c384bc2ca92da904.js"],"Providers"]
+4:I[1133,[],""]
+5:I[4297,[],""]
+6:I[4534,["179","static/chunks/179-7880f3be5613c168.js","757","static/chunks/757-867bd0db11d44168.js","727","static/chunks/727-189a4a547f964be9.js","762","static/chunks/762-5ef1cd0d777a0220.js","907","static/chunks/907-48e293d9973bc953.js","177","static/chunks/app/layout-c384bc2ca92da904.js"],"Analytics"]
+7:I[1076,[],"ClientPageRoot"]
+8:I[6092,["179","static/chunks/179-7880f3be5613c168.js","888","static/chunks/888-611c661908f832b1.js","757","static/chunks/757-867bd0db11d44168.js","727","static/chunks/727-189a4a547f964be9.js","497","static/chunks/497-76bc34df9d79c819.js","907","static/chunks/907-48e293d9973bc953.js","974","static/chunks/app/page-fd516a0f51a91a86.js"],"default"]
+b:I[1872,[],"OutletBoundary"]
+c:"$Sreact.suspense"
+e:I[1872,[],"ViewportBoundary"]
+10:I[1872,[],"MetadataBoundary"]
+12:I[7567,[],""]
+:HL["/_next/static/media/37786be940ec402b-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/478cfa4924927909-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/5c0c2bcbaa4149ca-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/98e207f02528a563-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/a259cf9a9b4ee5a8-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/bb3ef058b751a6ad-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/cccb76cee38030ea-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/d3ebbfd689654d3a-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/db96af6b531dc71f-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/f36144f235cd456e-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/css/db670518d50495b3.css","style"]
+:HL["/_next/static/css/3375959ac1f6ec67.css","style"]
+0:{"P":null,"b":"n435qPH5rHs0PAF51zL39","c":["",""],"q":"","i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/db670518d50495b3.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/3375959ac1f6ec67.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_f367f3 __variable_3c557b font-sans antialiased","children":[["$","$L2",null,{"children":["$","$L3",null,{"children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}],["$","$L6",null,{}]]}]}]]}],{"children":[["$","$1","c",{"children":[["$","$L7",null,{"Component":"$8","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@9","$@a"]}}],null,["$","$Lb",null,{"children":["$","$c",null,{"name":"Next.MetadataOutlet","children":"$@d"}]}]]}],{},null,false,false]},null,false,false],["$","$1","h",{"children":[null,["$","$Le",null,{"children":"$@f"}],["$","div",null,{"hidden":true,"children":["$","$L10",null,{"children":["$","$c",null,{"name":"Next.Metadata","children":"$@11"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],false]],"m":"$undefined","G":["$12",[]],"S":true}
+9:{}
+a:"$0:f:0:1:1:children:0:props:children:0:props:serverProvidedParams:params"
+f:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+13:I[2569,[],"IconMark"]
+11:[["$","title","0",{"children":"Cleverly AI Grader - Intelligent Test Grading System"}],["$","meta","1",{"name":"description","content":"AI-assisted test grading with course materials ingestion, rubric generation, and handwritten submission analysis"}],["$","meta","2",{"name":"generator","content":"v0.app"}],["$","link","3",{"rel":"icon","href":"/icon-light-32x32.png","media":"(prefers-color-scheme: light)"}],["$","link","4",{"rel":"icon","href":"/icon-dark-32x32.png","media":"(prefers-color-scheme: dark)"}],["$","link","5",{"rel":"icon","href":"/icon.svg","type":"image/svg+xml"}],["$","link","6",{"rel":"apple-touch-icon","href":"/apple-icon.png"}],["$","$L13","7",{}]]
+d:null
