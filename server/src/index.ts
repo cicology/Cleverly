@@ -7,6 +7,10 @@ import coursesRouter from "./routes/courses.js";
 import gradersRouter from "./routes/graders.js";
 import submissionsRouter from "./routes/submissions.js";
 import analyticsRouter from "./routes/analytics.js";
+import dashboardRouter from "./routes/dashboard.js";
+import profileRouter from "./routes/profile.js";
+import settingsRouter from "./routes/settings.js";
+import exportRouter from "./routes/export.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { initializeSocketIO } from "./services/socketService.js";
 import "./workers/embeddingWorker.js";
@@ -29,6 +33,10 @@ app.use("/api/courses", coursesRouter);
 app.use("/api/graders", gradersRouter);
 app.use("/api", submissionsRouter);
 app.use("/api", analyticsRouter);
+app.use("/api", dashboardRouter);
+app.use("/api", profileRouter);
+app.use("/api", settingsRouter);
+app.use("/api", exportRouter);
 app.use(errorHandler);
 
 httpServer.listen(env.port, () => {

@@ -13,7 +13,7 @@ AI-assisted test management: ingest study guides, extract course topics, generat
 - See `design/wireframes.md` for psychology-informed recommendations (Hick’s Law sorting, Fitts’ Law grading tray, queue/offline status, variable-reward insights, subject color system) and ASCII wireframes for the core screens.
 
 ## Stack
-- Frontend: Vite + React + TypeScript, Zustand store, React Query provider, Lucide icons.
+- Frontend: Next.js 15 + React 19 + TypeScript, Zustand store, React Query provider, Tailwind CSS + shadcn/ui, Lucide icons.
 - Backend: Express, Supabase client, BullMQ (Redis), Google Gemini 1.5 Pro (via `@google/generative-ai`), Zod validation, Pino logging.
 - Data: Supabase Postgres + pgvector, Supabase Storage for files.
 
@@ -59,10 +59,10 @@ docker-compose.yml  # Redis for BullMQ
      REDIS_URL=redis://localhost:6379
      STORAGE_BUCKET=courses
 
-     # Frontend configuration
-     VITE_API_URL=http://localhost:4000/api
-     VITE_SUPABASE_URL=${SUPABASE_URL}
-     VITE_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+     # Frontend configuration (in client/.env.local)
+     NEXT_PUBLIC_API_URL=http://localhost:4000/api
+     NEXT_PUBLIC_SUPABASE_URL=${SUPABASE_URL}
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
      ```
 
 3. **Database setup**
@@ -109,7 +109,7 @@ docker-compose.yml  # Redis for BullMQ
    ```
 
 7. **Access the application**
-   - Frontend: http://localhost:5173 (Vite dev server)
+   - Frontend: http://localhost:3000 (Next.js dev server)
    - Backend API: http://localhost:4000
    - Health check: http://localhost:4000/api/health
 
@@ -142,7 +142,7 @@ docker-compose.yml  # Redis for BullMQ
 - Analytics: `GET /api/graders/:id/analytics`
 
 > Auth placeholder: requests accept `Authorization: Bearer <token>` and attach it as `user.id`. Replace `requireAuth` with Supabase JWT verification before production.
-> Now wired: backend will validate Supabase JWTs via `supabase.auth.getUser(token)`. Provide a real access token (or set `VITE_SUPABASE_DEMO_TOKEN` in the client for quick tests).
+> Now wired: backend will validate Supabase JWTs via `supabase.auth.getUser(token)`. Provide a real access token (or set `NEXT_PUBLIC_SUPABASE_DEMO_TOKEN` in the client for quick tests).
 
 ## Frontend highlights
 - **Hero + stats** to summarize pipeline health.

@@ -41,11 +41,13 @@ alter table public.courses enable row level security;
 alter table public.course_files enable row level security;
 alter table public.course_embeddings enable row level security;
 
-create policy if not exists "Users can CRUD own courses"
+drop policy if exists "Users can CRUD own courses" on public.courses;
+create policy "Users can CRUD own courses"
   on public.courses for all
   using (auth.uid() = user_id);
 
-create policy if not exists "Users can CRUD own course files"
+drop policy if exists "Users can CRUD own course files" on public.course_files;
+create policy "Users can CRUD own course files"
   on public.course_files for all
   using (
     course_id in (
@@ -53,7 +55,8 @@ create policy if not exists "Users can CRUD own course files"
     )
   );
 
-create policy if not exists "Users can CRUD own embeddings"
+drop policy if exists "Users can CRUD own embeddings" on public.course_embeddings;
+create policy "Users can CRUD own embeddings"
   on public.course_embeddings for all
   using (
     course_file_id in (

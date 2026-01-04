@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "setup:db": "tsx src/scripts/setupDatabase.ts",
@@ -26,6 +26,7 @@
     "pino": "^9.3.1",
     "pino-pretty": "^11.2.2",
     "socket.io": "^4.8.1",
+    "xlsx": "^0.18.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {

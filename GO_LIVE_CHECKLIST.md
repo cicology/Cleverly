@@ -63,14 +63,14 @@ GEMINI_API_KEY=AIzaSy...
 PORT=4000
 REDIS_URL=redis://localhost:6379
 STORAGE_BUCKET=courses
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:3000
 ```
 
-**Client (.env):**
+**Client (.env.local):**
 ```env
-VITE_API_URL=http://localhost:4000/api
-VITE_SUPABASE_URL=https://xxx.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJ...
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 ```
 
 - [ ] Configure server/.env
@@ -149,13 +149,13 @@ VITE_SUPABASE_ANON_KEY=eyJ...
 - [ ] Sign up at https://vercel.com
 - [ ] Import GitHub repo
 - [ ] Root directory: `client`
-- [ ] Framework: Vite
+- [ ] Framework: Next.js
 - [ ] Build: `npm run build`
-- [ ] Output: `dist`
+- [ ] Output: `.next`
 - [ ] Set environment variables:
-  - `VITE_API_URL` = your backend URL + /api
-  - `VITE_SUPABASE_URL`
-  - `VITE_SUPABASE_ANON_KEY`
+  - `NEXT_PUBLIC_API_URL` = your backend URL + /api
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - [ ] Deploy
 - [ ] Get deployment URL
 
@@ -164,14 +164,14 @@ VITE_SUPABASE_ANON_KEY=eyJ...
 - [ ] Connect GitHub repo
 - [ ] Base directory: `client`
 - [ ] Build: `npm run build`
-- [ ] Publish: `dist`
+- [ ] Publish: `.next`
 - [ ] Set environment variables
 - [ ] Deploy
 
 **Option C: Cloudflare Pages**
 - [ ] Sign up at https://pages.cloudflare.com
 - [ ] Connect GitHub repo
-- [ ] Framework: Vite
+- [ ] Framework: Next.js
 - [ ] Configure build settings
 - [ ] Set environment variables
 - [ ] Deploy
@@ -200,9 +200,9 @@ NODE_ENV=production
 CLIENT_URL=https://your-frontend-domain.com
 ```
 
-**Update Client .env:**
+**Update Client .env.local:**
 ```env
-VITE_API_URL=https://your-backend-domain.com/api
+NEXT_PUBLIC_API_URL=https://your-backend-domain.com/api
 ```
 
 ---
