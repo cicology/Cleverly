@@ -8,7 +8,6 @@
       "source": "/:path+/",
       "destination": "/:path+",
       "internal": true,
-      "priority": true,
       "statusCode": 308,
       "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
     }
@@ -20,6 +19,14 @@
     "fallback": []
   },
   "dynamicRoutes": [
+    {
+      "page": "/courses/[id]",
+      "regex": "^/courses/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/courses/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
     {
       "page": "/graders/[id]",
       "regex": "^/graders/([^/]+?)(?:/)?$",
@@ -35,12 +42,6 @@
       "regex": "^/(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/(?:/)?$"
-    },
-    {
-      "page": "/_global-error",
-      "regex": "^/_global\\-error(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/_global\\-error(?:/)?$"
     },
     {
       "page": "/_not-found",
@@ -85,6 +86,12 @@
       "namedRegex": "^/grading(?:/)?$"
     },
     {
+      "page": "/grading/upload",
+      "regex": "^/grading/upload(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/grading/upload(?:/)?$"
+    },
+    {
       "page": "/settings",
       "regex": "^/settings(?:/)?$",
       "routeKeys": {},
@@ -108,9 +115,7 @@
     "prefetchSuffix": ".prefetch.rsc",
     "prefetchSegmentHeader": "next-router-segment-prefetch",
     "prefetchSegmentSuffix": ".segment.rsc",
-    "prefetchSegmentDirSuffix": ".segments",
-    "clientParamParsing": false,
-    "dynamicRSCPrerender": false
+    "prefetchSegmentDirSuffix": ".segments"
   },
   "rewriteHeaders": {
     "pathHeader": "x-nextjs-rewritten-path",

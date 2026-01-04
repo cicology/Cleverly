@@ -393,7 +393,7 @@ Cleverly/
 ### Frontend
 - **Framework:** React 19.2
 - **Language:** TypeScript
-- **Build Tool:** Vite 7.2
+- **Build Tool:** Next.js 15
 - **State Management:** React Query (TanStack Query) + Zustand (legacy)
 - **Auth:** Supabase Auth + Auth UI
 - **Real-time:** Socket.IO Client
@@ -469,14 +469,14 @@ GEMINI_API_KEY=your-gemini-api-key
 PORT=4000
 REDIS_URL=redis://localhost:6379
 STORAGE_BUCKET=courses
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:3000
 ```
 
 **Client (`client/.env`):**
 ```env
-VITE_API_URL=http://localhost:4000/api
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
 #### 3. Set Up Supabase
@@ -496,7 +496,7 @@ supabase db reset
 **Enable Auth:**
 1. Go to Authentication → Settings
 2. Enable Email provider
-3. Configure site URL: `http://localhost:5173`
+3. Configure site URL: `http://localhost:3000`
 
 #### 4. Start Redis
 ```bash
@@ -516,13 +516,13 @@ npm run dev
 ```bash
 cd client
 npm run dev
-# Client starts on http://localhost:5173
+# Client starts on http://localhost:3000
 ```
 
 #### 6. Test the Application
 
 **Option A: Use the UI**
-1. Open http://localhost:5173
+1. Open http://localhost:3000
 2. Click "Sign In" and create an account
 3. Create a course with study materials
 4. Create a grader with test paper + memo
@@ -768,7 +768,7 @@ Total time: 45s
 **Fix (Optional):**
 - Implement code splitting with dynamic imports
 - Use lazy loading for heavy components
-- Configure manual chunks in `vite.config.ts`
+- Configure manual chunks in `next.config.js`
 
 ---
 
@@ -871,9 +871,9 @@ node dist/index.js
 
 **Environment Variables:**
 ```env
-VITE_API_URL=https://your-backend-domain.com/api
-VITE_SUPABASE_URL=https://...
-VITE_SUPABASE_ANON_KEY=...
+NEXT_PUBLIC_API_URL=https://your-backend-domain.com/api
+NEXT_PUBLIC_SUPABASE_URL=https://...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
 
 **Build Commands:**

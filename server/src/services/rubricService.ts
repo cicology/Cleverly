@@ -19,7 +19,7 @@ export async function extractRubricFromText(testText: string, memoText: string):
     ];
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
   const prompt = `${RUBRIC_EXTRACTION_PROMPT}
 TEST PAPER:
 ${testText}

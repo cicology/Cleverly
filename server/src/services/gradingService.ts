@@ -41,7 +41,7 @@ export async function gradeAnswer(
     };
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
   const prompt = fillPrompt(GRADING_PROMPT, {
     question_text: rubric.question_text ?? "",
     expected_answer: rubric.expected_answer,

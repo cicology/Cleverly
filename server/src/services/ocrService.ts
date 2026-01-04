@@ -33,7 +33,7 @@ export async function extractAnswersFromPdf(
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const base64Data = buffer.toString("base64");
 
     const result = await model.generateContent([

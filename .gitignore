@@ -12,6 +12,7 @@ client/dist/
 server/dist/
 build/
 *.tsbuildinfo
+client/.next/
 
 # Environment variables (CRITICAL - Contains API keys & secrets!)
 .env

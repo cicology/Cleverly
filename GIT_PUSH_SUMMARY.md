@@ -96,7 +96,7 @@ git push -u origin main
 ### ✅ Configuration Files
 - package.json (root, client, server)
 - tsconfig.json
-- vite.config.ts
+- next.config.js
 - .gitignore
 - .env.example (template only - no secrets!)
 

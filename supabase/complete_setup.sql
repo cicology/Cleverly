@@ -27,11 +27,13 @@ create table if not exists public.profiles (
 -- Row Level Security
 alter table public.profiles enable row level security;
 
-create policy if not exists "Users can view own profile"
+drop policy if exists "Users can view own profile" on public.profiles;
+create policy "Users can view own profile"
   on public.profiles for select
   using (auth.uid() = id);
 
-create policy if not exists "Users can update own profile"
+drop policy if exists "Users can update own profile" on public.profiles;
+create policy "Users can update own profile"
   on public.profiles for update
   using (auth.uid() = id);
 
@@ -84,11 +86,13 @@ alter table public.courses enable row level security;
 alter table public.course_files enable row level security;
 alter table public.course_embeddings enable row level security;
 
-create policy if not exists "Users can CRUD own courses"
+drop policy if exists "Users can CRUD own courses" on public.courses;
+create policy "Users can CRUD own courses"
   on public.courses for all
   using (auth.uid() = user_id);
 
-create policy if not exists "Users can CRUD own course files"
+drop policy if exists "Users can CRUD own course files" on public.course_files;
+create policy "Users can CRUD own course files"
   on public.course_files for all
   using (
     course_id in (
@@ -96,7 +100,8 @@ create policy if not exists "Users can CRUD own course files"
     )
   );
 
-create policy if not exists "Users can CRUD own embeddings"
+drop policy if exists "Users can CRUD own embeddings" on public.course_embeddings;
+create policy "Users can CRUD own embeddings"
   on public.course_embeddings for all
   using (
     course_file_id in (
@@ -180,7 +185,8 @@ alter table public.rubrics enable row level security;
 alter table public.submissions enable row level security;
 alter table public.submission_grades enable row level security;
 
-create policy if not exists "Users can CRUD own graders"
+drop policy if exists "Users can CRUD own graders" on public.graders;
+create policy "Users can CRUD own graders"
   on public.graders for all
   using (
     course_id in (
@@ -188,7 +194,8 @@ create policy if not exists "Users can CRUD own graders"
     )
   );
 
-create policy if not exists "Users can CRUD own rubrics"
+drop policy if exists "Users can CRUD own rubrics" on public.rubrics;
+create policy "Users can CRUD own rubrics"
   on public.rubrics for all
   using (
     grader_id in (
@@ -198,7 +205,8 @@ create policy if not exists "Users can CRUD own rubrics"
     )
   );
 
-create policy if not exists "Users can CRUD own submissions"
+drop policy if exists "Users can CRUD own submissions" on public.submissions;
+create policy "Users can CRUD own submissions"
   on public.submissions for all
   using (
     grader_id in (
@@ -208,7 +216,8 @@ create policy if not exists "Users can CRUD own submissions"
     )
   );
 
-create policy if not exists "Users can CRUD own submission grades"
+drop policy if exists "Users can CRUD own submission grades" on public.submission_grades;
+create policy "Users can CRUD own submission grades"
   on public.submission_grades for all
   using (
     submission_id in (
@@ -250,6 +259,36 @@ as $$
   order by ce.embedding <=> query_embedding
   limit match_count;
 $$;
+
+-- ============================================================================
+-- USER SETTINGS
+-- ============================================================================
+create table if not exists public.user_settings (
+  user_id uuid references public.profiles(id) on delete cascade primary key,
+  notifications_email boolean default true,
+  notifications_grading_complete boolean default true,
+  theme text default 'system',
+  gemini_api_key text,
+  created_at timestamp with time zone default now(),
+  updated_at timestamp with time zone default now()
+);
+
+alter table public.user_settings enable row level security;
+
+drop policy if exists "Users can view own settings" on public.user_settings;
+create policy "Users can view own settings"
+  on public.user_settings for select
+  using (auth.uid() = user_id);
+
+drop policy if exists "Users can insert own settings" on public.user_settings;
+create policy "Users can insert own settings"
+  on public.user_settings for insert
+  with check (auth.uid() = user_id);
+
+drop policy if exists "Users can update own settings" on public.user_settings;
+create policy "Users can update own settings"
+  on public.user_settings for update
+  using (auth.uid() = user_id);
 
 -- ============================================================================
 -- VERIFICATION QUERIES

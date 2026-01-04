@@ -49,17 +49,17 @@ GEMINI_API_KEY=AIzaSy...
 PORT=4000
 REDIS_URL=redis://localhost:6379
 STORAGE_BUCKET=courses
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:3000
 ```
 
-#### Client (.env)
+#### Client (.env.local)
 
-Create `client/.env`:
+Create `client/.env.local`:
 
 ```env
-VITE_API_URL=http://localhost:4000/api
-VITE_SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 ---
@@ -106,7 +106,7 @@ npm run dev
 
 You should see:
 ```
-Local: http://localhost:5173
+Local: http://localhost:3000
 ```
 
 ---
@@ -127,7 +127,7 @@ Expected output:
 
 ### Option 2: Manual Test
 
-1. **Open** http://localhost:5173
+1. **Open** http://localhost:3000
 2. **Sign Up:**
    - Click "Sign In"
    - Switch to "Sign Up" tab

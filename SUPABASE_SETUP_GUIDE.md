@@ -348,7 +348,7 @@ REDIS_URL=redis://localhost:6379
 STORAGE_BUCKET=courses
 
 # Client URL (for Socket.IO CORS)
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:3000
 ```
 
 ### 5.2 Client Environment (.env)
@@ -357,11 +357,11 @@ Edit `client/.env`:
 
 ```env
 # API Configuration
-VITE_API_URL=http://localhost:4000/api
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
 
 # Supabase Configuration (for client-side auth)
-VITE_SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 **Where to find these values:**
@@ -456,7 +456,7 @@ Your Supabase database is now configured with:
    ```
 
 4. **Test the Application:**
-   - Open http://localhost:5173
+   - Open http://localhost:3000
    - Sign up with your test account
    - Create a course
    - Upload grader files

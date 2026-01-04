@@ -244,7 +244,7 @@ async function step4UploadSubmission() {
       formData.append("files", new Blob([defaultContent]), "submission.txt");
     }
 
-    const url = `${API_BASE_URL}/api/submissions/graders/${graderId}/submissions`;
+    const url = `${API_BASE_URL}/api/graders/${graderId}/submissions`;
     const response = await fetch(url, {
       method: "POST",
       headers: DEMO_TOKEN ? { Authorization: `Bearer ${DEMO_TOKEN}` } : {},
@@ -277,7 +277,7 @@ async function step4UploadSubmission() {
 
 async function step5TriggerGrading() {
   try {
-    const url = `${API_BASE_URL}/api/submissions/graders/${graderId}/grade-all`;
+    const url = `${API_BASE_URL}/api/graders/${graderId}/grade-all`;
     const response = await fetch(url, {
       method: "POST",
       headers: DEMO_TOKEN ? { Authorization: `Bearer ${DEMO_TOKEN}` } : {}
@@ -313,7 +313,7 @@ async function step6PollForResults() {
 
     while (Date.now() - startTime < MAX_POLL_TIME) {
       try {
-        const response = await makeRequest("GET", `/api/submissions/submissions/${submissionId}`);
+        const response = await makeRequest("GET", `/api/submissions/${submissionId}`);
 
         if (response.submission) {
           submission = response.submission;
@@ -360,7 +360,7 @@ async function step6PollForResults() {
 
 async function step7GetAnalytics() {
   try {
-    const response = await makeRequest("GET", `/api/analytics/graders/${graderId}/analytics`);
+    const response = await makeRequest("GET", `/api/graders/${graderId}/analytics`);
 
     logResult({
       step: "Step 7: Get Analytics",

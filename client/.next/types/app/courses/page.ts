@@ -1,10 +1,8 @@
-// File: /Users/Rusumba/Oryares Sol/Cleverly/client/src/app/courses/page.tsx
-import * as entry from '../../../../src/app/courses/page.js'
+// File: /Users/Rusumba/Oryares Sol/Cleverly/client/app/courses/page.tsx
+import * as entry from '../../../../app/courses/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-import type { PrefetchForTypeCheckInternal } from 'next/dist/build/segment-config/app/app-segment-config.js'
-
-type TEntry = typeof import('../../../../src/app/courses/page.js')
+type TEntry = typeof import('../../../../app/courses/page.js')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }
@@ -15,7 +13,6 @@ checkFields<Diff<{
   default: Function
   config?: {}
   generateStaticParams?: Function
-  unstable_prefetch?: PrefetchForTypeCheckInternal
   revalidate?: RevalidateRange<TEntry> | false
   dynamic?: 'auto' | 'force-dynamic' | 'error' | 'force-static'
   dynamicParams?: boolean
@@ -28,6 +25,7 @@ checkFields<Diff<{
   generateMetadata?: Function
   viewport?: any
   generateViewport?: Function
+  experimental_ppr?: boolean
   
 }, TEntry, ''>>()
 

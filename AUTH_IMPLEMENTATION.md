@@ -174,8 +174,8 @@ Add these to `client/.env`:
 
 ```env
 # Supabase Configuration
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key-here
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 ```
 
 ### Optional Development Token
@@ -183,7 +183,7 @@ VITE_SUPABASE_ANON_KEY=your-anon-key-here
 For development without Supabase:
 
 ```env
-VITE_SUPABASE_DEMO_TOKEN=demo-jwt-token-here
+NEXT_PUBLIC_SUPABASE_DEMO_TOKEN=demo-jwt-token-here
 ```
 
 ## Backend Integration
@@ -248,7 +248,7 @@ The auth system gracefully handles missing Supabase configuration:
   - App functions normally without auth
   - Console warning is displayed in dev mode
 
-- **Demo Token Mode:** If `VITE_SUPABASE_DEMO_TOKEN` is set:
+- **Demo Token Mode:** If `NEXT_PUBLIC_SUPABASE_DEMO_TOKEN` is set:
   - API requests use the demo token
   - Useful for testing backend without setting up Supabase
 
@@ -308,7 +308,7 @@ In Supabase Dashboard:
 
 ### Issue: "Supabase not configured" message
 
-**Solution:** Check that `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set in `client/.env` and don't contain placeholder values.
+**Solution:** Check that `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set in `client/.env` and don't contain placeholder values.
 
 ### Issue: Sign up/sign in not working
 

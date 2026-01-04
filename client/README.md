@@ -1,19 +1,30 @@
-# Cleverly Client (Vite + React)
+# Cleverly UI/UX review
 
-UI skeleton for the Cleverly AI Grader MVP.
+*Automatically synced with your [v0.app](https://v0.app) deployments*
 
-## Scripts
-```bash
-npm install
-npm run dev    # start on http://localhost:5173
-npm run build
-```
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/herij46-gmailcoms-projects/v0-cleverly-ui-ux-review)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/rjKK09Ex7pU)
 
-## Features
-- Hero + stats summarizing AI pipeline health.
-- Course creation modal (info + topics/materials) with manual + AI topic flows.
-- Course library grid with status badges and topic chips.
-- Rubric editor (inline editing, add/regenerate controls).
-- Grading dashboard split view (submissions list + question-level feedback/overrides).
+## Overview
 
-Backend base URL defaults to `http://localhost:4000/api` (set `VITE_API_URL` to override). For auth, set `VITE_SUPABASE_DEMO_TOKEN` or wire Supabase auth to populate `sb-access-token` in localStorage.
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+
+## Deployment
+
+Your project is live at:
+
+**[https://vercel.com/herij46-gmailcoms-projects/v0-cleverly-ui-ux-review](https://vercel.com/herij46-gmailcoms-projects/v0-cleverly-ui-ux-review)**
+
+## Build your app
+
+Continue building your app on:
+
+**[https://v0.app/chat/rjKK09Ex7pU](https://v0.app/chat/rjKK09Ex7pU)**
+
+## How It Works
+
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
