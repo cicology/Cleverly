@@ -10,8 +10,11 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { User, Bell, Key, Palette } from "lucide-react"
 import { useProfile, useSettings, useUpdateProfile, useUpdateSettings } from "@/hooks/useApi"
+import { supabase } from "@/lib/supabase"
+import { useAuth } from "@/components/auth/auth-provider"
 
 export default function SettingsPage() {
+  const { user } = useAuth()
   const profileQuery = useProfile()
   const settingsQuery = useSettings()
   const updateProfile = useUpdateProfile()
@@ -20,6 +23,12 @@ export default function SettingsPage() {
 
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
+  const [newEmail, setNewEmail] = useState("")
+  const [emailChangeStatus, setEmailChangeStatus] = useState<{
+    type: "success" | "error"
+    message: string
+  } | null>(null)
+  const [changingEmail, setChangingEmail] = useState(false)
   const [notificationsEmail, setNotificationsEmail] = useState(true)
   const [notificationsGradingComplete, setNotificationsGradingComplete] = useState(true)
   const [theme, setThemePreference] = useState<"light" | "dark" | "system">("system")
@@ -44,7 +53,42 @@ export default function SettingsPage() {
   }, [settingsQuery.data, setTheme])
 
   const handleProfileSave = () => {
-    updateProfile.mutate({ full_name: fullName, email })
+    updateProfile.mutate({ full_name: fullName })
+  }
+
+  const handleEmailChange = async () => {
+    if (!newEmail.trim() || newEmail === email) {
+      setEmailChangeStatus({
+        type: "error",
+        message: "Please enter a valid new email address.",
+      })
+      return
+    }
+
+    setEmailChangeStatus(null)
+    setChangingEmail(true)
+
+    try {
+      const { error } = await supabase.auth.updateUser({
+        email: newEmail.trim(),
+      })
+
+      if (error) {
+        setEmailChangeStatus({
+          type: "error",
+          message: error.message,
+        })
+        return
+      }
+
+      setEmailChangeStatus({
+        type: "success",
+        message: "Check both your current and new email to confirm the change.",
+      })
+      setNewEmail("")
+    } finally {
+      setChangingEmail(false)
+    }
   }
 
   const handleSettingsSave = () => {
@@ -84,11 +128,50 @@ export default function SettingsPage() {
               <Input id="name" value={fullName} onChange={(event) => setFullName(event.target.value)} />
             </div>
             <div>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+              <Label htmlFor="current-email">Current Email</Label>
+              <Input id="current-email" type="email" value={email} disabled className="bg-muted" />
+              <p className="text-xs text-muted-foreground mt-1">
+                To change your email, use the form below.
+              </p>
             </div>
             <Button onClick={handleProfileSave} disabled={updateProfile.isPending}>
               {updateProfile.isPending ? "Saving..." : "Save Changes"}
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <User className="size-5" />
+              <CardTitle>Change Email</CardTitle>
+            </div>
+            <CardDescription>Update your email address. You'll need to verify both your current and new email.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <Label htmlFor="new-email">New Email Address</Label>
+              <Input
+                id="new-email"
+                type="email"
+                placeholder="newemail@school.edu"
+                value={newEmail}
+                onChange={(event) => setNewEmail(event.target.value)}
+              />
+            </div>
+            {emailChangeStatus && (
+              <div
+                className={`rounded-md border px-3 py-2 text-sm ${
+                  emailChangeStatus.type === "error"
+                    ? "border-destructive/40 bg-destructive/10 text-destructive"
+                    : "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                }`}
+              >
+                {emailChangeStatus.message}
+              </div>
+            )}
+            <Button onClick={handleEmailChange} disabled={changingEmail || !newEmail.trim()}>
+              {changingEmail ? "Updating..." : "Change Email"}
             </Button>
           </CardContent>
         </Card>

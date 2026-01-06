@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -44,19 +45,35 @@ export function Sidebar({ open, onToggle, isMobile }: SidebarProps) {
         isMobile ? (open ? "w-64" : "-translate-x-full") : open ? "w-64" : "w-20",
       )}
     >
-      {/* Responsive header with proper sizing */}
+      {/* Responsive header with logo */}
       <div className="p-4 md:p-6 flex items-center justify-between border-b border-sidebar-border min-h-[64px] md:min-h-[72px]">
-        {open && <h1 className="text-lg md:text-xl font-bold text-sidebar-foreground">Cleverly</h1>}
+        {open ? (
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/cleverly-icon.svg" alt="Cleverly" width={32} height={32} />
+            <span className="text-lg md:text-xl font-bold cleverly-gradient-text">Cleverly</span>
+          </Link>
+        ) : (
+          !isMobile && (
+            <Link href="/" className="mx-auto">
+              <Image src="/cleverly-icon.svg" alt="Cleverly" width={32} height={32} />
+            </Link>
+          )
+        )}
         {/* Hide toggle on mobile (controlled by hamburger menu) */}
-        {!isMobile && (
+        {!isMobile && open && (
           <button
             onClick={onToggle}
-            className={cn(
-              "p-2 rounded-lg hover:bg-sidebar-accent text-sidebar-foreground transition-colors touch-manipulation",
-              !open && "mx-auto",
-            )}
+            className="p-2 rounded-lg hover:bg-sidebar-accent text-sidebar-foreground transition-colors touch-manipulation"
           >
-            {open ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />}
+            <ChevronLeft className="size-4" />
+          </button>
+        )}
+        {!isMobile && !open && (
+          <button
+            onClick={onToggle}
+            className="p-2 rounded-lg hover:bg-sidebar-accent text-sidebar-foreground transition-colors touch-manipulation absolute right-2 top-4"
+          >
+            <ChevronRight className="size-4" />
           </button>
         )}
       </div>

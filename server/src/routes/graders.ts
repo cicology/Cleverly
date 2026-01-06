@@ -1,13 +1,15 @@
 import { Router } from "express";
-import multer from "multer";
 import { z } from "zod";
 import { requireAuth, AuthedRequest } from "../middleware/auth.js";
 import { validateBody } from "../middleware/validateRequest.js";
 import { supabase } from "../config/supabase.js";
 import { storeFile } from "../services/storageService.js";
 import { extractRubricFromText } from "../services/rubricService.js";
+import { extractTextFromBuffer } from "../services/pdfService.js";
+import { createMemoryUpload } from "../config/uploads.js";
+import { getCourseForUser, getGraderForUser } from "../services/ownershipService.js";
 
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = createMemoryUpload({ maxFiles: 2 });
 const router = Router();
 
 const graderSchema = z.object({
@@ -30,6 +32,12 @@ router.post(
     const testFile = files?.test_file?.[0];
     const memoFile = files?.memo_file?.[0];
 
+    // Verify the course belongs to the user
+    const course = await getCourseForUser(body.course_id, req.user!.id);
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
     const { data: grader, error } = await supabase
       .from("graders")
       .insert({
@@ -44,21 +52,21 @@ router.post(
     if (error || !grader) return res.status(500).json({ error: error?.message ?? "Failed to create grader" });
 
     if (testFile) {
-      await storeFile(testFile, `${grader.id}-test`);
-      await supabase.from("graders").update({ test_file_path: testFile.originalname }).eq("id", grader.id);
+      const stored = await storeFile(testFile, `${grader.id}-test`);
+      await supabase.from("graders").update({ test_file_path: stored.storagePath }).eq("id", grader.id);
     }
     if (memoFile) {
-      await storeFile(memoFile, `${grader.id}-memo`);
-      await supabase.from("graders").update({ memo_file_path: memoFile.originalname }).eq("id", grader.id);
+      const stored = await storeFile(memoFile, `${grader.id}-memo`);
+      await supabase.from("graders").update({ memo_file_path: stored.storagePath }).eq("id", grader.id);
     }
 
-    // Basic text extraction from buffers (real implementation should parse PDFs)
+    // Extract text from PDF buffers using proper PDF parsing
     if (testFile && memoFile) {
       try {
-        const rubric = await extractRubricFromText(
-          testFile.buffer.toString("utf-8"),
-          memoFile.buffer.toString("utf-8")
-        );
+        const testText = await extractTextFromBuffer(testFile.buffer, testFile.originalname);
+        const memoText = await extractTextFromBuffer(memoFile.buffer, memoFile.originalname);
+
+        const rubric = await extractRubricFromText(testText, memoText);
         await Promise.all(
           rubric.map((item, idx) =>
             supabase.from("rubrics").insert({
@@ -90,8 +98,8 @@ router.post(
 );
 
 router.get("/:id", requireAuth, async (req: AuthedRequest, res) => {
-  const { data: grader, error } = await supabase.from("graders").select("*").eq("id", req.params.id).single();
-  if (error || !grader) return res.status(404).json({ error: "Grader not found" });
+  const grader = await getGraderForUser(req.params.id, req.user!.id);
+  if (!grader) return res.status(404).json({ error: "Grader not found" });
 
   const { data: rubric } = await supabase
     .from("rubrics")
@@ -99,10 +107,13 @@ router.get("/:id", requireAuth, async (req: AuthedRequest, res) => {
     .eq("grader_id", req.params.id)
     .order("order_index", { ascending: true });
 
-  return res.json({ grader, rubric: rubric ?? [] });
+  const { courses: _course, ...graderData } = grader as any;
+  return res.json({ grader: graderData, rubric: rubric ?? [] });
 });
 
 router.put("/:id/rubric", requireAuth, async (req: AuthedRequest, res) => {
+  const grader = await getGraderForUser(req.params.id, req.user!.id);
+  if (!grader) return res.status(404).json({ error: "Grader not found" });
   const items = req.body as any[];
   await supabase.from("rubrics").delete().eq("grader_id", req.params.id);
   await Promise.all(

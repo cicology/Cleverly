@@ -24,7 +24,7 @@ GRADING INSTRUCTIONS:
 OUTPUT FORMAT (JSON):
 {
   "marks_awarded": <number>,
-  "reasoning": "Step-by-step explanation of how marks were awarded",
+  "ai_reasoning": "Step-by-step explanation of how marks were awarded",
   "confidence_score": <0.0 to 1.0>,
   "feedback": "Constructive feedback for the student"
 }

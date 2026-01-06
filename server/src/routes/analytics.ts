@@ -1,11 +1,14 @@
 import { Router } from "express";
 import { requireAuth, AuthedRequest } from "../middleware/auth.js";
 import { supabase } from "../config/supabase.js";
+import { getGraderForUser } from "../services/ownershipService.js";
 
 const router = Router();
 
 router.get("/graders/:id/analytics", requireAuth, async (req: AuthedRequest, res) => {
   const graderId = req.params.id;
+  const grader = await getGraderForUser(graderId, req.user!.id);
+  if (!grader) return res.status(404).json({ error: "Grader not found" });
   const { data: submissions } = await supabase
     .from("submissions")
     .select("total_score,max_possible_score,status")

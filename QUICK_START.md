@@ -50,6 +50,22 @@ PORT=4000
 REDIS_URL=redis://localhost:6379
 STORAGE_BUCKET=courses
 CLIENT_URL=http://localhost:3000
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
+MAX_UPLOAD_MB=10
+MAX_UPLOAD_FILES=20
+ALLOW_DEV_AUTH_BYPASS=false
+ALLOW_USER_GEMINI_KEYS=false
+GEMINI_FILE_SEARCH_ENABLED=true
+GEMINI_FILE_SEARCH_MODEL=gemini-2.0-flash
+GEMINI_GRADING_MODEL=gemini-2.0-flash
+OCR_MODEL=gemini-1.5-pro
+
+# LTI 1.3 (optional)
+LTI_ENABLED=false
+LTI_PORT=4001
+LTI_KEY=your-lti-signing-key
+LTI_DB_URL=postgres://user:pass@host:5432/lti
+LTI_TOOL_URL=https://api.example.com
 ```
 
 #### Client (.env.local)
@@ -60,6 +76,7 @@ Create `client/.env.local`:
 NEXT_PUBLIC_API_URL=http://localhost:4000/api
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_ALLOW_DEMO_TOKEN=false
 ```
 
 ---

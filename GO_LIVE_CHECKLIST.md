@@ -23,7 +23,7 @@ This checklist covers everything needed to take your application from local deve
 
 ### 2.1 Supabase Setup (30 minutes)
 - [ ] Create Supabase project at https://supabase.com
-- [ ] Run database migrations (all 4 SQL files)
+- [ ] Run database migrations (all 6 SQL files: 001-006)
 - [ ] Verify pgvector extension enabled
 - [ ] Create 'courses' storage bucket
 - [ ] Configure Row Level Security (RLS) policies
@@ -64,6 +64,12 @@ PORT=4000
 REDIS_URL=redis://localhost:6379
 STORAGE_BUCKET=courses
 CLIENT_URL=http://localhost:3000
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
+MAX_UPLOAD_MB=10
+MAX_UPLOAD_FILES=20
+ALLOW_DEV_AUTH_BYPASS=false
+ALLOW_USER_GEMINI_KEYS=false
+OCR_MODEL=gemini-1.5-pro
 ```
 
 **Client (.env.local):**
@@ -71,6 +77,7 @@ CLIENT_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:4000/api
 NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+NEXT_PUBLIC_ALLOW_DEMO_TOKEN=false
 ```
 
 - [ ] Configure server/.env

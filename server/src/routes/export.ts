@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as XLSX from "xlsx";
 import { requireAuth, AuthedRequest } from "../middleware/auth.js";
 import { supabase } from "../config/supabase.js";
+import { getGraderForUser } from "../services/ownershipService.js";
 
 const router = Router();
 
@@ -10,13 +11,8 @@ router.get("/graders/:id/export", requireAuth, async (req: AuthedRequest, res) =
 
   try {
     // Get grader info
-    const { data: grader, error: graderError } = await supabase
-      .from("graders")
-      .select("*, courses(title)")
-      .eq("id", graderId)
-      .single();
-
-    if (graderError || !grader) {
+    const grader = await getGraderForUser(graderId, req.user!.id);
+    if (!grader) {
       return res.status(404).json({ error: "Grader not found" });
     }
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, FileText, GraduationCap, ArrowRight, CheckCircle2 } from "lucide-react"
@@ -31,11 +32,17 @@ export function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
   const [currentStep, setCurrentStep] = useState(0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-cyan-50 dark:from-[#0f0a1a] dark:via-[#1a1025] dark:to-[#0f0a1a] flex items-center justify-center p-6">
       <div className="max-w-4xl w-full">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4 text-balance">Welcome to Cleverly</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 text-pretty">
+          <div className="flex justify-center mb-6">
+            <Image src="/cleverly-icon.svg" alt="Cleverly" width={80} height={80} />
+          </div>
+          <h1 className="text-5xl font-bold mb-4 text-balance">
+            <span className="text-foreground">Welcome to </span>
+            <span className="cleverly-gradient-text">Cleverly</span>
+          </h1>
+          <p className="text-xl text-muted-foreground text-pretty">
             AI-powered test grading that saves time and ensures consistency
           </p>
         </div>

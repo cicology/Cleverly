@@ -64,8 +64,18 @@ async function runMigrations() {
 
     // Verify tables were created
     console.log("\n🔍 Verifying tables...");
-    const tables = ["profiles", "courses", "course_files", "course_embeddings",
-                    "graders", "rubrics", "submissions", "submission_grades"];
+    const tables = [
+      "profiles",
+      "courses",
+      "course_files",
+      "course_embeddings",
+      "graders",
+      "rubrics",
+      "submissions",
+      "submission_grades",
+      "lti_course_links",
+      "lti_launches"
+    ];
 
     for (const table of tables) {
       const { error } = await supabase.from(table).select("*").limit(1);

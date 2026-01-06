@@ -1,0 +1,63 @@
+STUDENT SUBMISSION - TEST_STUDENT_002 (With Errors)
+=====================================
+Mathematics Final Examination Answer Sheet
+
+SECTION A: SHORT ANSWER QUESTIONS
+
+Question 1:
+The derivative of f(x) = 3x^3 + 2x^2 - 5x + 1
+f'(x) = 9x^2 + 4x - 5
+At x = 2: f'(2) = 9(2) + 4(2) - 5 = 18 + 8 - 5 = 21
+[ERROR: Should be 9(4) not 9(2)]
+
+Question 2:
+∫[0,2] (x^2 + 3x) dx
+The antiderivative is (x^3/3) + 3x
+Evaluating from 0 to 2: (8/3 + 6) - 0 = 8/3 + 6 = 8.67
+[ERROR: Forgot to integrate 3x properly - should be 3x^2/2]
+
+Question 3:
+2x + 3y = 8
+x - y = 1
+
+From the second equation: x = y + 1
+Substituting into the first: 2(y + 1) + 3y = 8
+2y + 2 + 3y = 8
+5y = 6
+y = 1.2
+x = 2.2
+[CORRECT]
+
+Question 4:
+The series Σ(1/n^2) diverges because the terms don't go to zero fast enough.
+[ERROR: This series actually converges (p-series with p=2 > 1)]
+
+SECTION B: LONG ANSWER QUESTIONS
+
+Question 5: Profit Optimization
+Cost: C(x) = 100 + 5x + 0.01x^2
+Revenue: R(x) = 50x
+
+(a) Profit = Revenue - Cost
+P(x) = 50x - 100 - 5x - 0.01x^2 = 45x - 100 - 0.01x^2
+[CORRECT]
+
+(b) To maximize: P'(x) = 45 - 0.02x = 0
+x = 45/0.02 = 2250 units
+[CORRECT]
+
+(c) Maximum profit = 45(2250) - 100 - 0.01(2250)^2
+= 101,250 - 100 - 50,625 = 50,525
+[CORRECT]
+
+Question 6: Integration Problem
+[SKIPPED - Ran out of time]
+
+Question 7: Matrix Analysis
+A = [[1, 2], [3, 4]]
+
+(a) Eigenvalues:
+I tried to calculate but got confused with the characteristic polynomial.
+[INCOMPLETE]
+
+END OF SUBMISSION

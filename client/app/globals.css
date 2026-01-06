@@ -3,41 +3,46 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated root color scheme for Cleverly AI Grader with education-focused colors */
+/* Cleverly AI Grader - Brand colors from logo (pink-purple-blue gradient) */
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #1e293b;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #1e293b;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #2563eb;
+  --popover-foreground: #1e293b;
+  --primary: #a855f7;
   --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f8fafc;
+  --secondary: #faf5ff;
+  --secondary-foreground: #1e293b;
+  --muted: #faf5ff;
   --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
+  --accent: #f3e8ff;
+  --accent-foreground: #1e293b;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #2563eb;
-  --chart-1: #2563eb;
-  --chart-2: #10b981;
-  --chart-3: #f59e0b;
-  --chart-4: #ef4444;
-  --chart-5: #8b5cf6;
+  --border: #e9d5ff;
+  --input: #e9d5ff;
+  --ring: #a855f7;
+  --chart-1: #a855f7;
+  --chart-2: #38bdf8;
+  --chart-3: #e879f9;
+  --chart-4: #10b981;
+  --chart-5: #f59e0b;
   --radius: 0.5rem;
-  --sidebar: #f8fafc;
-  --sidebar-foreground: #0f172a;
-  --sidebar-primary: #2563eb;
+  --sidebar: #faf5ff;
+  --sidebar-foreground: #1e293b;
+  --sidebar-primary: #a855f7;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f1f5f9;
-  --sidebar-accent-foreground: #0f172a;
-  --sidebar-border: #e2e8f0;
-  --sidebar-ring: #2563eb;
+  --sidebar-accent: #f3e8ff;
+  --sidebar-accent-foreground: #1e293b;
+  --sidebar-border: #e9d5ff;
+  --sidebar-ring: #a855f7;
+
+  /* Cleverly gradient colors */
+  --gradient-start: #e879f9;
+  --gradient-mid: #a855f7;
+  --gradient-end: #38bdf8;
   --shadow-x: 0px;
   --shadow-y: 1px;
   --shadow-blur: 3px;
@@ -55,38 +60,42 @@
 }
 
 .dark {
-  --background: #0f172a;
+  --background: #0f0a1a;
   --foreground: #f8fafc;
-  --card: #1e293b;
+  --card: #1a1025;
   --card-foreground: #f8fafc;
-  --popover: #1e293b;
+  --popover: #1a1025;
   --popover-foreground: #f8fafc;
-  --primary: #3b82f6;
+  --primary: #c084fc;
   --primary-foreground: #ffffff;
-  --secondary: #1e293b;
+  --secondary: #1a1025;
   --secondary-foreground: #f8fafc;
-  --muted: #334155;
+  --muted: #2d1f3d;
   --muted-foreground: #cbd5e1;
-  --accent: #1e293b;
+  --accent: #2d1f3d;
   --accent-foreground: #f8fafc;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #334155;
-  --input: #334155;
-  --ring: #3b82f6;
-  --chart-1: #3b82f6;
-  --chart-2: #10b981;
-  --chart-3: #f59e0b;
-  --chart-4: #ef4444;
-  --chart-5: #8b5cf6;
-  --sidebar: #0f172a;
+  --border: #3b2d4d;
+  --input: #3b2d4d;
+  --ring: #c084fc;
+  --chart-1: #c084fc;
+  --chart-2: #38bdf8;
+  --chart-3: #f0abfc;
+  --chart-4: #10b981;
+  --chart-5: #f59e0b;
+  --sidebar: #0f0a1a;
   --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #3b82f6;
+  --sidebar-primary: #c084fc;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e293b;
+  --sidebar-accent: #2d1f3d;
   --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: #334155;
-  --sidebar-ring: #3b82f6;
+  --sidebar-border: #3b2d4d;
+  --sidebar-ring: #c084fc;
+
+  --gradient-start: #f0abfc;
+  --gradient-mid: #c084fc;
+  --gradient-end: #38bdf8;
   --shadow-x: 0px;
   --shadow-y: 1px;
   --shadow-blur: 3px;
@@ -185,6 +194,17 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Cleverly brand gradient */
+  .cleverly-gradient {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  }
+  .cleverly-gradient-text {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* Add safe area padding for mobile devices with notches */

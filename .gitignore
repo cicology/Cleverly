@@ -24,6 +24,9 @@ server/.env.local
 client/.env
 client/.env.local
 
+# MCP Configuration (contains service role keys)
+.mcp.json
+
 # OS files
 .DS_Store
 Thumbs.db

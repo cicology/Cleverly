@@ -7,6 +7,7 @@ AI-assisted test management: ingest study guides, extract course topics, generat
 - **Grader setup** to upload test & memo, extract/edit rubrics, and queue grading.
 - **AI marking dashboard** with split view (submissions list + question-by-question feedback) and override controls.
 - **Backend skeleton** (Express + Supabase + BullMQ + Gemini) wired for courses, graders, submissions, analytics.
+- **LTI 1.3 integration hooks** for LMS launch + course linking.
 - **Database migrations** for courses, files, embeddings, graders, rubrics, submissions, and grade overrides.
 
 ## UX/Wireframes
@@ -14,14 +15,14 @@ AI-assisted test management: ingest study guides, extract course topics, generat
 
 ## Stack
 - Frontend: Next.js 15 + React 19 + TypeScript, Zustand store, React Query provider, Tailwind CSS + shadcn/ui, Lucide icons.
-- Backend: Express, Supabase client, BullMQ (Redis), Google Gemini 1.5 Pro (via `@google/generative-ai`), Zod validation, Pino logging.
+- Backend: Express, Supabase client, BullMQ (Redis), Google Gemini (File Search + OCR), Zod validation, Pino logging.
 - Data: Supabase Postgres + pgvector, Supabase Storage for files.
 
 ## Project layout
 ```
 client/      # React UI (course modal, rubric editor, grading dashboard)
 server/      # Express API, services, workers
-supabase/    # SQL migrations (001-003)
+supabase/    # SQL migrations (001-006)
 docker-compose.yml  # Redis for BullMQ
 .env.example       # Required environment variables
 ```
@@ -58,11 +59,26 @@ docker-compose.yml  # Redis for BullMQ
      PORT=4000
      REDIS_URL=redis://localhost:6379
      STORAGE_BUCKET=courses
+     CLIENT_URL=http://localhost:3000
+     CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
+     MAX_UPLOAD_MB=10
+     MAX_UPLOAD_FILES=20
+     ALLOW_DEV_AUTH_BYPASS=false
+     ALLOW_USER_GEMINI_KEYS=false
+     GEMINI_FILE_SEARCH_ENABLED=true
+     GEMINI_FILE_SEARCH_MODEL=gemini-2.0-flash
+     GEMINI_FILE_SEARCH_STORE_PREFIX=cleverly-course-
+     GEMINI_FILE_SEARCH_POLL_MS=5000
+     GEMINI_FILE_SEARCH_MAX_WAIT_MS=120000
+     GEMINI_GRADING_MODEL=gemini-2.0-flash
+     OCR_MODEL=gemini-1.5-pro
+     ADMIN_API_KEY=your-admin-api-key
 
      # Frontend configuration (in client/.env.local)
      NEXT_PUBLIC_API_URL=http://localhost:4000/api
      NEXT_PUBLIC_SUPABASE_URL=${SUPABASE_URL}
      NEXT_PUBLIC_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+     NEXT_PUBLIC_ALLOW_DEMO_TOKEN=false
      ```
 
 3. **Database setup**
@@ -71,10 +87,14 @@ docker-compose.yml  # Redis for BullMQ
      1. `supabase/migrations/001_initial_schema.sql`
      2. `supabase/migrations/002_courses.sql`
      3. `supabase/migrations/003_grading_module.sql`
+     4. `supabase/migrations/004_match_course_embeddings.sql` (required for RAG)
+     5. `supabase/migrations/005_user_settings.sql` (required for user settings)
+     6. `supabase/migrations/006_file_search_and_lti.sql` (File Search + LTI)
    - These migrations will:
      - Enable `uuid-ossp` and `vector` extensions
-     - Create tables: profiles, courses, course_files, course_embeddings, graders, rubrics, submissions, submission_grades
+     - Create tables: profiles, courses, course_files, course_embeddings, graders, rubrics, submissions, submission_grades, user_settings, lti_course_links, lti_launches
      - Set up Row Level Security (RLS) policies
+     - Create indexes and vector similarity search functions
      - Create indexes for performance
 
 4. **Start Redis**
@@ -112,6 +132,10 @@ docker-compose.yml  # Redis for BullMQ
    - Frontend: http://localhost:3000 (Next.js dev server)
    - Backend API: http://localhost:4000
    - Health check: http://localhost:4000/api/health
+
+### Admin utilities
+- `POST /api/admin/file-search/precreate` (requires `Authorization: Bearer $ADMIN_API_KEY`)
+- Body: `{ "course_id": "uuid"?, "upload_files": true?, "force_reupload": false?, "limit": 200? }`
 
 ### Troubleshooting
 

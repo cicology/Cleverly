@@ -1,0 +1,47 @@
+STUDENT SUBMISSION - TEST_STUDENT_003 (Partial Attempt)
+=====================================
+Mathematics Final Examination Answer Sheet
+
+SECTION A: SHORT ANSWER QUESTIONS
+
+Question 1:
+The derivative of f(x) = 3x^3 + 2x^2 - 5x + 1
+f'(x) = 9x^2 + 4x - 5
+[PARTIAL - Didn't evaluate at x=2, 5/10 marks]
+
+Question 2:
+I don't remember how to do definite integrals.
+[NO ATTEMPT]
+
+Question 3:
+2x + 3y = 8
+x - y = 1
+
+I think x = 2 and y = 1 works? Let me check: 2(2) + 3(1) = 7, not 8.
+So that's wrong. I'm not sure how to solve this.
+[ATTEMPTED BUT INCORRECT]
+
+Question 4:
+[NO ANSWER PROVIDED]
+
+SECTION B: LONG ANSWER QUESTIONS
+
+Question 5: Profit Optimization
+Cost: C(x) = 100 + 5x + 0.01x^2
+Revenue: R(x) = 50x
+
+(a) Profit = Revenue - Cost
+P(x) = 50x - (100 + 5x + 0.01x^2)
+[PARTIAL - Set up but didn't simplify]
+
+(b) [NO ATTEMPT]
+
+(c) [NO ATTEMPT]
+
+Question 6: Integration Problem
+[NO ATTEMPT]
+
+Question 7: Matrix Analysis
+[NO ATTEMPT]
+
+END OF SUBMISSION

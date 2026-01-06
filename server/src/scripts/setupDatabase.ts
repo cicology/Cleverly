@@ -98,8 +98,18 @@ async function setupDatabase() {
 
     // Try to check if tables exist
     console.log("\n🔍 Checking existing tables...");
-    const tables = ["profiles", "courses", "course_files", "course_embeddings",
-                    "graders", "rubrics", "submissions", "submission_grades"];
+    const tables = [
+      "profiles",
+      "courses",
+      "course_files",
+      "course_embeddings",
+      "graders",
+      "rubrics",
+      "submissions",
+      "submission_grades",
+      "lti_course_links",
+      "lti_launches"
+    ];
 
     let existingCount = 0;
     for (const table of tables) {

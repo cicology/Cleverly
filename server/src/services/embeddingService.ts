@@ -13,21 +13,27 @@ function chunkText(text: string, size = 800, overlap = 50): string[] {
   return chunks.length ? chunks : [text];
 }
 
-export async function generateEmbeddings(content: string): Promise<number[][]> {
+export async function generateEmbeddings(content: string): Promise<{ chunk: string; embedding: number[] }[]> {
   if (!content.trim()) return [];
   const chunks = chunkText(content);
 
   if (!genAI) {
     // Offline fallback for local dev
-    return chunks.map((_, idx) => Array.from({ length: 10 }, () => Math.sin(idx)));
+    return chunks.map((chunk, idx) => ({
+      chunk,
+      embedding: Array.from({ length: 10 }, () => Math.sin(idx))
+    }));
   }
 
   const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
-  const embeddings: number[][] = [];
+  const embeddings: { chunk: string; embedding: number[] }[] = [];
 
   for (const chunk of chunks) {
     const result = await model.embedContent(chunk);
-    embeddings.push(result.embedding.values);
+    embeddings.push({
+      chunk,
+      embedding: result.embedding.values
+    });
   }
 
   return embeddings;

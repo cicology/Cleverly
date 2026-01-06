@@ -34,7 +34,7 @@ router.get("/settings", requireAuth, async (req: AuthedRequest, res) => {
     return res.status(500).json({ error: error.message });
   }
 
-  const apiKey = data?.gemini_api_key ?? "";
+  const apiKey = env.allowUserGeminiKeys ? data?.gemini_api_key ?? "" : "";
   const settings = {
     notifications_email: data?.notifications_email ?? defaults.notifications_email,
     notifications_grading_complete: data?.notifications_grading_complete ?? defaults.notifications_grading_complete,
@@ -43,19 +43,22 @@ router.get("/settings", requireAuth, async (req: AuthedRequest, res) => {
 
   return res.json({
     settings,
-    api_key_configured: Boolean(apiKey || env.geminiApiKey),
+    api_key_configured: Boolean(env.geminiApiKey || apiKey),
     api_key_last4: apiKey ? apiKey.slice(-4) : undefined
   });
 });
 
 router.put("/settings", requireAuth, validateBody(settingsSchema), async (req: AuthedRequest, res) => {
   const updates = req.body as z.infer<typeof settingsSchema>;
+  if (updates.gemini_api_key && !env.allowUserGeminiKeys) {
+    return res.status(400).json({ error: "User-provided API keys are disabled." });
+  }
   const payload = {
     user_id: req.user!.id,
     notifications_email: updates.notifications_email,
     notifications_grading_complete: updates.notifications_grading_complete,
     theme: updates.theme,
-    gemini_api_key: updates.gemini_api_key
+    gemini_api_key: env.allowUserGeminiKeys ? updates.gemini_api_key : undefined
   };
 
   const { data, error } = await supabase

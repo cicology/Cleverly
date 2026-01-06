@@ -41,7 +41,7 @@ export async function gradeAnswer(
     };
   }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: env.geminiGradingModel });
   const prompt = fillPrompt(GRADING_PROMPT, {
     question_text: rubric.question_text ?? "",
     expected_answer: rubric.expected_answer,
@@ -53,16 +53,38 @@ export async function gradeAnswer(
 
   const response = await model.generateContent(prompt);
   const text = response.response.text();
-  try {
-    const parsed = JSON.parse(text) as GradeResult;
-    return parsed;
-  } catch (err) {
-    const numericScore = Number(text.match(/-?\d+(\.\d+)?/)?.[0]) || 0;
+  const parsed = parseGradeJson(text);
+
+  if (parsed) {
+    const reasoning = parsed.ai_reasoning ?? parsed.reasoning ?? "No reasoning provided.";
     return {
-      marks_awarded: Math.min(numericScore, rubric.max_marks),
-      ai_reasoning: text,
-      confidence_score: 0.4,
-      feedback: "Auto-parsed score; please review."
+      marks_awarded: Math.min(Number(parsed.marks_awarded) || 0, rubric.max_marks),
+      ai_reasoning: reasoning,
+      confidence_score: Number(parsed.confidence_score) || 0.4,
+      feedback: parsed.feedback ?? "No feedback provided."
     };
+  }
+
+  const numericScore = Number(text.match(/-?\d+(\.\d+)?/)?.[0]) || 0;
+  return {
+    marks_awarded: Math.min(numericScore, rubric.max_marks),
+    ai_reasoning: text,
+    confidence_score: 0.4,
+    feedback: "Auto-parsed score; please review."
+  };
+}
+
+function parseGradeJson(text: string): (Partial<GradeResult> & { reasoning?: string }) | null {
+  const cleaned = text.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
+  try {
+    return JSON.parse(cleaned) as Partial<GradeResult> & { reasoning?: string };
+  } catch {
+    const match = cleaned.match(/\{[\s\S]*\}/);
+    if (!match) return null;
+    try {
+      return JSON.parse(match[0]) as Partial<GradeResult> & { reasoning?: string };
+    } catch {
+      return null;
+    }
   }
 }

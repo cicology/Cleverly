@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+import Link from "next/link"
 import { Menu, Bell, User, Search, X } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -29,6 +31,12 @@ export function TopNav({ onMenuClick }: TopNavProps) {
         <Button variant="ghost" size="icon-sm" onClick={onMenuClick} className="shrink-0 md:hidden touch-manipulation">
           <Menu className="size-5" />
         </Button>
+
+        {/* Mobile logo */}
+        <Link href="/" className="flex items-center gap-2 md:hidden">
+          <Image src="/cleverly-icon.svg" alt="Cleverly" width={28} height={28} />
+          <span className="font-bold cleverly-gradient-text">Cleverly</span>
+        </Link>
 
         <div className="hidden sm:block min-w-0">
           <Breadcrumbs />

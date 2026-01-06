@@ -1,13 +1,14 @@
 import { Router } from "express";
-import multer from "multer";
 import { z } from "zod";
 import { requireAuth, AuthedRequest } from "../middleware/auth.js";
 import { validateBody } from "../middleware/validateRequest.js";
 import { supabase } from "../config/supabase.js";
 import { storeFile } from "../services/storageService.js";
 import { embeddingQueue } from "../workers/embeddingWorker.js";
+import { createMemoryUpload } from "../config/uploads.js";
 
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = createMemoryUpload({ maxFiles: 9 });
+
 const router = Router();
 
 const courseSchema = z.object({
@@ -68,6 +69,7 @@ router.post(
             file_name: file.originalname,
             file_type: fileType,
             file_path: stored.storagePath,
+            file_size: file.size,
             status: "processing"
           })
           .select()
@@ -76,6 +78,7 @@ router.post(
         if (!fileError && fileRow && embeddingQueue) {
           await embeddingQueue.add("embed", {
             course_file_id: fileRow.id,
+            course_id: data.id,
             file_path: stored.storagePath,
             file_name: file.originalname,
             mime_type: file.mimetype
@@ -90,6 +93,18 @@ router.post(
 );
 
 router.get("/:id/files", requireAuth, async (req: AuthedRequest, res) => {
+  // First verify the course belongs to the user
+  const { data: course, error: courseError } = await supabase
+    .from("courses")
+    .select("id")
+    .eq("id", req.params.id)
+    .eq("user_id", req.user!.id)
+    .single();
+
+  if (courseError || !course) {
+    return res.status(404).json({ error: "Course not found" });
+  }
+
   const { data, error } = await supabase
     .from("course_files")
     .select("*")
